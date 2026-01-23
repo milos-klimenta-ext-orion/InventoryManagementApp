@@ -14,6 +14,15 @@ interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertProduct(product: ProductEntity): Long
 
+    @Query(
+        """
+    UPDATE products 
+    SET current_stock = :newStock 
+    WHERE id = :productId
+    """
+    )
+    suspend fun updateStock(productId: Long, newStock: Int)
+
     @Delete
     suspend fun deleteProduct(product: ProductEntity)
 
@@ -25,19 +34,23 @@ interface ProductDao {
     suspend fun getProductById(id: Long): ProductEntity?
 
     // SEARCH
-    @Query("""
+    @Query(
+        """
         SELECT * FROM products 
         WHERE name LIKE '%' || :query || '%' 
            OR barcode LIKE '%' || :query || '%'
         ORDER BY name ASC
-    """)
+    """
+    )
     fun searchProducts(query: String): Flow<List<ProductEntity>>
 
     // LOW STOCK
-    @Query("""
+    @Query(
+        """
         SELECT * FROM products
         WHERE current_stock <= minimum_stock
         ORDER BY current_stock ASC
-    """)
+    """
+    )
     fun getLowStockProducts(): Flow<List<ProductEntity>>
 }

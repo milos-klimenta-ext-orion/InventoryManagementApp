@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
     fun getAllProducts(): Flow<List<Product>>
+    suspend fun updateStock(productId: Long, newStock: Int)
     fun searchProducts(query: String): Flow<List<Product>>
     fun getLowStockProducts(): Flow<List<Product>>
     suspend fun getProductById(id: Long): Product?

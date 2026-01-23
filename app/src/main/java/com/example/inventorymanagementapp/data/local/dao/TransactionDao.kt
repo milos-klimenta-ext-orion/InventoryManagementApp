@@ -2,6 +2,7 @@ package com.example.inventorymanagementapp.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import com.example.inventorymanagementapp.data.local.entity.InventoryTransactionEntity
@@ -11,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TransactionDao {
     // CREATE
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertTransaction(transaction: InventoryTransactionEntity): Long
 
     // READ

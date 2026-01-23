@@ -40,6 +40,16 @@ class FakeProductDao : ProductDao {
         return 1L
     }
 
+    override suspend fun updateStock(productId: Long, newStock: Int) {
+        val index = products.indexOfFirst { it.id == productId }
+        if (index != -1) {
+            val old = products[index]
+            val updated = old.copy(currentStock = newStock)
+            products[index] = updated
+            flow.value = products.toList()
+        }
+    }
+
     override suspend fun deleteProduct(product: ProductEntity) {
         products.removeIf { it.id == product.id }
         flow.value = products.toList()

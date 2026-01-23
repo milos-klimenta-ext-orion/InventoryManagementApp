@@ -17,6 +17,10 @@ class ProductRepositoryImpl @Inject constructor(
         return productDao.getAllProducts().map { it.map { entity -> entity.toDomain() } }
     }
 
+    override suspend fun updateStock(productId: Long, newStock: Int) {
+        productDao.updateStock(productId, newStock)
+    }
+
     override fun searchProducts(query: String): Flow<List<Product>> {
         return productDao.searchProducts(query).map {
             it.map { entity ->

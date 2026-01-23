@@ -17,6 +17,17 @@ class FakeProductRepository @Inject constructor() : ProductRepository {
 
     override fun getAllProducts(): Flow<List<Product>> = _products
 
+    override suspend fun updateStock(productId: Long, newStock: Int) {
+        val updatedList = _products.value.map { product ->
+            if (product.id == productId) {
+                product.copy(currentStock = newStock)
+            } else {
+                product
+            }
+        }
+        _products.value = updatedList
+    }
+
     override fun searchProducts(query: String): Flow<List<Product>> =
         _products.map { list ->
             list.filter { it.name.contains(query, ignoreCase = true) || it.barcode?.contains(query) == true }

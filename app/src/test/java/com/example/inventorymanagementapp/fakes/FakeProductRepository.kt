@@ -23,6 +23,17 @@ class FakeProductRepository : ProductRepository {
 
     override fun getAllProducts(): Flow<List<Product>> = productsFlow
 
+    override suspend fun updateStock(productId: Long, newStock: Int) {
+        val updatedList = productsFlow.value.map { product ->
+            if (product.id == productId) {
+                product.copy(currentStock = newStock)
+            } else {
+                product
+            }
+        }
+        productsFlow.value = updatedList
+    }
+
     override fun searchProducts(query: String): Flow<List<Product>> =
         flowOf(emptyList())
 

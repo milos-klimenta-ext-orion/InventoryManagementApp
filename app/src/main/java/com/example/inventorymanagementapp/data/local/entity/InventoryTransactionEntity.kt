@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.example.inventorymanagementapp.domain.model.TransactionType
 import kotlinx.parcelize.Parcelize
@@ -18,6 +19,9 @@ import kotlinx.parcelize.Parcelize
             childColumns = ["product_id"],
             onDelete = ForeignKey.CASCADE
         )
+    ],
+    indices = [
+        Index(value = ["product_id"])
     ]
 )
 data class InventoryTransactionEntity(

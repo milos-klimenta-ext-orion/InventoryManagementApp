@@ -5,47 +5,47 @@
 # Features
 1. Product Management
 
-  Add, edit, and delete products.
+    Add, edit, and delete products.
 
-  Track current stock and minimum stock levels.
+    Track current stock and minimum stock levels.
 
-  Search products by name or barcode.
+    Search products by name or barcode.
 
-  Barcode scanning support with camera integration.
+    Barcode scanning support with camera integration.
 
 2. Supplier Management
 
-  Add, edit, and delete suppliers.
+    Add, edit, and delete suppliers.
 
-  View supplier list and details.
+    View supplier list and details.
 
-  Search suppliers by name.
+    Search suppliers by name.
 
 3. Stock and Transaction Management
 
-  Record inventory transactions: Restock and Sale.
+    Record inventory transactions: Restock and Sale.
 
-  Update product stock automatically when transactions occur.
+    Update product stock automatically when transactions occur.
 
-  View transaction history filtered by type and date range.
+    View transaction history filtered by type and date range.
 
-  Export transactions or inventory reports as CSV files.
+    Export transactions or inventory reports as CSV files.
 
-  Data persistence using Room.
+    Data persistence using Room.
 
 4. Dashboard
 
-  Shows products that are low in stock.
+    Shows products that are low in stock.
 
-  Displays recent transactions.
+    Displays recent transactions.
 
 5. Authentication
 
-  Simple login with username/password.
+    Simple login with username/password.
 
-  Persisted login state using DataStore.
+    Persisted login state using DataStore.
 
-  Navigate to dashboard after successful login.
+    Navigate to dashboard after successful login.
 
 # Architecture
 
@@ -99,10 +99,14 @@
 
 # Planned / Future Tasks
 
-  Add UI Tests for all screens to ensure correctness.
+  1. Add UI Tests for all screens to ensure correctness.
 
-  Add Charts in Stock Management screen for better visualization.
+  2. Add Charts in Stock Management screen for better visualization.
 
-  Implement Notifications for low stock items.
+  3. Implement Notifications for low stock items.
 
-  Improve UI design: current UI is basic and intended for testing only.
+  4. Improve UI design: current UI is basic and intended for testing only.
+
+# Known Issues
+  
+   1. Issue with dialog for runtime permission access for camera!

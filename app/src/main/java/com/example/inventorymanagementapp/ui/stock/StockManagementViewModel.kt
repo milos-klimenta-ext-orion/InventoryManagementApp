@@ -1,5 +1,6 @@
 package com.example.inventorymanagementapp.ui.stock
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.inventorymanagementapp.domain.model.InventoryTransaction
@@ -61,18 +62,23 @@ class StockManagementViewModel @Inject constructor(
                 else
                     product.currentStock - quantity
 
-            transactionRepository.insertTransaction(
-                InventoryTransaction(
-                    productId = product.id,
-                    quantity = quantity,
-                    type = state.transactionType,
-                    notes = state.notes
+            val inventoryTransaction = InventoryTransaction(
+                productId = product.id,
+                quantity = quantity,
+                type = state.transactionType,
+                notes = state.notes
+            )
+            try {
+                transactionRepository.insertTransaction(
+                    inventoryTransaction
                 )
-            )
 
-            productRepository.upsertProduct(
-                product.copy(currentStock = newStock)
-            )
+                productRepository.updateStock(
+                    product.id, newStock
+                )
+            } catch (e: Exception) {
+                Log.e("klima", "Transaction insert failed", e)
+            }
 
             _uiState.update { it.copy(success = true) }
         }
